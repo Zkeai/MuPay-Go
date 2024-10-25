@@ -17,6 +17,152 @@ definitions:
       msg:
         type: string
     type: object
+  db.YuCommodity:
+    properties:
+      api_status:
+        description: API对接：0=关闭，1=启用
+        type: integer
+      category_id:
+        description: 商品分类ID
+        type: integer
+      code:
+        description: 商品代码(API对接)
+        type: string
+      config:
+        description: 配置文件
+        type: string
+      contact_type:
+        description: 联系方式：0=任意，1=手机，2=邮箱，3=QQ
+        type: integer
+      coupon:
+        description: 优惠卷：0=关闭，1=启用
+        type: integer
+      cover:
+        description: 商品封面图片
+        type: string
+      create_time:
+        description: 创建时间
+        type: string
+      delivery_auto_mode:
+        description: 自动发卡模式：0=旧卡先发，1=随机发卡，2=新卡先发
+        type: integer
+      delivery_message:
+        description: 手动发货显示信息
+        type: string
+      delivery_way:
+        description: 发货方式：0=自动发货，1=手动发货/插件发货
+        type: integer
+      description:
+        description: 商品说明
+        type: string
+      draft_premium:
+        description: 指定卡密购买时溢价
+        type: number
+      draft_status:
+        description: 指定卡密购买：0=关闭，1=启用
+        type: integer
+      factory_price:
+        description: 成本单价
+        type: number
+      hide:
+        description: 隐藏：1=隐藏，0=不隐藏
+        type: integer
+      id:
+        description: 主键id
+        type: integer
+      inventory_hidden:
+        description: 隐藏库存：0=否，1=是
+        type: integer
+      inventory_sync:
+        description: '同步库存数量: 0=关，1=开'
+        type: integer
+      leave_message:
+        description: 发货留言
+        type: string
+      level_disable:
+        description: 禁用会员等级折扣，0=关闭，1=启用
+        type: integer
+      level_price:
+        description: 会员等级-定制价格
+        type: string
+      maximum:
+        description: 最大购买数量，0=无限制
+        type: integer
+      minimum:
+        description: 最低购买数量，0=无限制
+        type: integer
+      name:
+        description: 商品名称
+        type: string
+      only_user:
+        description: 限制登录购买：0=否，1=是
+        type: integer
+      owner:
+        description: 所属会员：0=系统，其他等于会员UID
+        type: integer
+      password_status:
+        description: 订单密码：0=关闭，1=启用
+        type: integer
+      price:
+        description: 商品单价(未登录)
+        type: number
+      purchase_count:
+        description: 限制购买数量：0=无限制
+        type: integer
+      recommend:
+        description: 推荐商品：0=否，1=是
+        type: integer
+      seckill_end_time:
+        description: 秒杀结束时间
+        type: string
+      seckill_start_time:
+        description: 秒杀开始时间
+        type: string
+      seckill_status:
+        description: 商品秒杀：0=关闭，1=开启
+        type: integer
+      send_email:
+        description: 发送邮件：0=否，1=是
+        type: integer
+      shared_code:
+        description: 共享平台-商品代码
+        type: string
+      shared_id:
+        description: 共享平台ID
+        type: integer
+      shared_premium:
+        description: 商品加价
+        type: number
+      shared_premium_type:
+        description: 加价模式
+        type: integer
+      shared_sync:
+        description: 同步平台价格：0=关，1=开
+        type: integer
+      sort:
+        description: 排序
+        type: integer
+      status:
+        description: 状态：0=下架，1=上架
+        type: integer
+      user_price:
+        description: 商品单价(会员价)
+        type: number
+      widget:
+        description: 控件
+        type: string
+    type: object
+  dto.CategoryAddReq:
+    properties:
+      icon:
+        type: string
+      name:
+        type: string
+      sort:
+        type: integer
+      userid:
+        type: integer
+    type: object
   dto.UserLoginReq:
     properties:
       wallet:
@@ -34,10 +180,104 @@ info:
   title: MuPay
   version: 1.0.0
 paths:
+  /category/public/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 管理员注册提交参数
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CategoryAddReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: 参数错误
+          schema:
+            type: string
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 增加商品分类
+      tags:
+      - category
+  /category/public/query:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/conf.ResponseError'
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 商品分类查询
+      tags:
+      - category
+  /commodity/projected/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 增加商品提交参数
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/db.YuCommodity'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: 参数错误
+          schema:
+            type: string
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 增加商品
+      tags:
+      - commodity
+  /commodity/public/query:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/conf.ResponseError'
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 商品查询
+      tags:
+      - commodity
   /user/protected/query:
     get:
       parameters:
-      - description: 地址
+      - description: 钱包地址
         in: query
         name: wallet
         required: true
@@ -87,6 +327,24 @@ paths:
       summary: 用户登录
       tags:
       - user
+  /user/public/query:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/conf.ResponseError'
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 商铺信息查询
+      tags:
+      - business
   /user/public/register:
     post:
       consumes:

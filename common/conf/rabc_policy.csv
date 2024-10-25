@@ -1,8 +1,13 @@
-p, admin, /api/v1/user/*, GET
-p, admin, /api/v1/user/*, POST
-p, user, /api/v1/user/*, GET
+p, admin, /api/v1/*, GET
+p, admin, /api/v1/*, POST
 p, merchant, /api/v1/user/*, GET
 p, merchant, /api/v1/user/*, POST
+p, merchant, /api/v1/category/protected/*, GET
+p, merchant, /api/v1/category/protected/*, POST
+
+p, user, /api/v1/user/protected/*, GET
+p, user, /api/v1/user/*, GET
+
 
 g, alice, admin
 g, bob, user

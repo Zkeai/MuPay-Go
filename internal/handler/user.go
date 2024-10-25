@@ -58,7 +58,7 @@ func userLogin(c *gin.Context) {
 		return
 	}
 
-	res, err := svc.UserLogin(c.Request.Context(), r.Wallet)
+	res, err := svc.UserLogin(c.Request.Context(), r.Wallet, c.Request.Host)
 	if err != nil {
 		logger.Error(err.Error())
 		c.JSON(http.StatusInternalServerError, conf.Response{Code: 500, Msg: "err", Data: err.Error()})

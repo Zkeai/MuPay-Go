@@ -43,12 +43,43 @@ func InitRouter(s *chttp.Server, service *service.Service) {
 		ugpub.POST("/register", userRegister)
 		ugpub.POST("/login", userLogin)
 	}
-	ugpro := ug.Group("/protected")
 
+	ugpro := ug.Group("/protected")
 	ugpro.Use(middleware.Middleware())
 	ugpro.Use(middleware.CasbinMiddleware(e))
 	{
 		ugpro.GET("/query", userQuery)
+	}
+
+	bg := g.Group("/business")
+	bgpub := bg.Group("/public")
+	{
+		bgpub.GET("/query", businessQuery)
+	}
+
+	cg := g.Group("/category")
+	cgpub := cg.Group("/public")
+	{
+		cgpub.GET("/query", categoryQuery)
+	}
+
+	cgpro := cg.Group("/protected")
+	cgpro.Use(middleware.Middleware())
+	cgpro.Use(middleware.CasbinMiddleware(e))
+	{
+		cgpro.POST("/add", categoryAdd)
+	}
+
+	comg := g.Group("/commodity")
+	comgpub := comg.Group("/public")
+	{
+		comgpub.GET("/query", commodityQuery)
+	}
+	comg.Use(middleware.Middleware())
+	comg.Use(middleware.CasbinMiddleware(e))
+	comgpro := comg.Group("/protected")
+	{
+		comgpro.POST("/add", createCommodity)
 	}
 
 }
