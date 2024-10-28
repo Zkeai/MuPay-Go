@@ -243,6 +243,51 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/public/logout": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "用户登出",
+                "parameters": [
+                    {
+                        "description": "用户登出提交参数",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserLogoutReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/conf.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "内部错误",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/user/public/query": {
             "get": {
                 "tags": [
@@ -546,6 +591,14 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.UserLogoutReq": {
+            "type": "object",
+            "properties": {
+                "jwt": {
                     "type": "string"
                 }
             }

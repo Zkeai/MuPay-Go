@@ -31,6 +31,7 @@ type SessionData struct {
 type LoginResponse struct {
 	SessionID string `json:"session_id"`
 	Token     string `json:"token"`
+	Role      string `json:"role"`
 }
 
 func (s *Service) UserRegister(ctx context.Context, wallet string) (*UserRegisterResponse, error) {
@@ -65,7 +66,7 @@ func (s *Service) UserRegister(ctx context.Context, wallet string) (*UserRegiste
 	}, nil
 }
 
-func (s *Service) UserLogin(ctx context.Context, wallet string, host string) (*LoginResponse, error) {
+func (s *Service) UserLogin(ctx context.Context, wallet string) (*LoginResponse, error) {
 
 	query, err := s.repo.UserQuery(ctx, wallet)
 	if err != nil || query == nil {
@@ -119,9 +120,24 @@ func (s *Service) UserLogin(ctx context.Context, wallet string, host string) (*L
 	if err != nil {
 		return &LoginResponse{}, err
 	}
+
+	//获取角色
+	userModel, err := s.repo.UserQuery(ctx, wallet)
+	role := userModel.Type
+	roleMap := map[int64]string{
+		0: "user",
+		1: "merchant",
+		2: "admin",
+	}
+	role_, exists := roleMap[role]
+	if !exists {
+		role_ = "user" // 默认情况
+	}
+
 	return &LoginResponse{
 		SessionID: id,
 		Token:     token,
+		Role:      role_,
 	}, nil
 }
 

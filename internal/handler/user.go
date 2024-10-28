@@ -3,6 +3,7 @@ package handler
 import (
 	"github.com/Zkeai/MuPay-Go/common/conf"
 	"github.com/Zkeai/MuPay-Go/common/logger"
+	"github.com/Zkeai/MuPay-Go/common/middleware"
 	"github.com/Zkeai/MuPay-Go/internal/dto"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -58,7 +59,7 @@ func userLogin(c *gin.Context) {
 		return
 	}
 
-	res, err := svc.UserLogin(c.Request.Context(), r.Wallet, c.Request.Host)
+	res, err := svc.UserLogin(c.Request.Context(), r.Wallet)
 	if err != nil {
 		logger.Error(err.Error())
 		c.JSON(http.StatusInternalServerError, conf.Response{Code: 500, Msg: "err", Data: err.Error()})
@@ -68,7 +69,35 @@ func userLogin(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, conf.Response{Code: 400, Msg: "fail", Data: res.Token})
 		return
 	}
-	c.JSON(http.StatusOK, conf.Response{Code: 200, Msg: "success", Data: res.Token})
+
+	c.JSON(http.StatusOK, conf.Response{Code: 200, Msg: "success", Data: res})
+}
+
+// userLogout 用户登出
+// @Tags  user
+// @Summary 用户登出
+// @Param req body dto.UserLogoutReq true "用户登出提交参数"
+// @Router /user/public/logout [post]
+// @Success 200 {object} conf.Response
+// @Failure 400 {object} string "参数错误"
+// @Failure 500 {object} string "内部错误"
+// @Produce json
+// @Accept json
+func userLogout(c *gin.Context) {
+	r := new(dto.UserLogoutReq)
+
+	if err := c.Bind(r); err != nil {
+		logger.Error(err)
+		c.JSON(http.StatusInternalServerError, conf.Response{Code: 500, Msg: "err", Data: err.Error()})
+		return
+	}
+	err := middleware.InvalidateToken(r.Jwt)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, conf.Response{Code: 500, Msg: "err", Data: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, conf.Response{Code: 200, Msg: "success", Data: "user logout"})
 }
 
 // userQuery 用户查询

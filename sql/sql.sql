@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 80300 (8.3.0)
  Source Host           : localhost:3306
- Source Schema         : yuka
+ Source Schema         : mupay
 
  Target Server Type    : MySQL
  Target Server Version : 80300 (8.3.0)
@@ -39,7 +39,6 @@ CREATE TABLE `yu_business` (
 -- Records of yu_business
 -- ----------------------------
 BEGIN;
-INSERT INTO `yu_business` (`id`, `user_id`, `shop_name`, `title`, `notice`, `service_url`, `subdomain`, `topdomain`, `master_display`, `create_time`) VALUES (2, 1001, '木鱼店铺', '木鱼店铺', '本程序为开源程序，使用者造成的一切法律后果与作者无关。', NULL, NULL, 'localhost:2900', 0, '2024-09-05 11:13:24');
 COMMIT;
 
 -- ----------------------------
@@ -64,8 +63,6 @@ CREATE TABLE `yu_category` (
 -- Records of yu_category
 -- ----------------------------
 BEGIN;
-INSERT INTO `yu_category` (`id`, `name`, `sort`, `create_time`, `owner`, `icon`, `status`, `hide`, `user_level_config`) VALUES (3, 'DEMO', 0, '2024-09-05 11:14:46', 1001, 'icon-shangpinguanli', 0, 0, NULL);
-INSERT INTO `yu_category` (`id`, `name`, `sort`, `create_time`, `owner`, `icon`, `status`, `hide`, `user_level_config`) VALUES (4, 'DEMO1', 0, '2024-09-05 11:14:51', 1001, 'icon-shangpinguanli', 0, 0, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -125,7 +122,7 @@ CREATE TABLE `yu_commodity` (
 -- Records of yu_commodity
 -- ----------------------------
 BEGIN;
-INSERT INTO `yu_commodity` (`id`, `category_id`, `name`, `description`, `cover`, `factory_price`, `price`, `user_price`, `status`, `owner`, `create_time`, `api_status`, `code`, `delivery_way`, `delivery_auto_mode`, `delivery_message`, `contact_type`, `password_status`, `sort`, `coupon`, `shared_id`, `shared_code`, `shared_premium`, `shared_premium_type`, `seckill_status`, `seckill_start_time`, `seckill_end_time`, `draft_status`, `draft_premium`, `inventory_hidden`, `leave_message`, `recommend`, `send_email`, `only_user`, `purchase_count`, `widget`, `level_price`, `level_disable`, `minimum`, `maximum`, `shared_sync`, `config`, `hide`, `inventory_sync`) VALUES (1, 3, '商品名称', '商品描述', '商品封面链接', 0.00, 0.00, 1.00, 0, 0, '2024-09-06 23:06:13', 0, 'bb6ac94671284d09b33586f52d02d5c5', 0, 0, '', 0, 0, 0, 0, 0, NULL, 0.00, 0, 0, NULL, NULL, 0, NULL, 0, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0, 0, 0, NULL, 0, 0);
+
 COMMIT;
 
 -- ----------------------------
@@ -174,7 +171,6 @@ CREATE TABLE `yu_user` (
 -- Records of yu_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `yu_user` (`id`, `wallet`, `status`, `type`, `create_time`, `login_time`, `login_ip`) VALUES (1002, '0xf5f77d4e368f6ee1115515db3a537bbf98888888', 1, 0, '2024-09-05 11:13:24', NULL, NULL);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

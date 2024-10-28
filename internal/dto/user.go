@@ -10,3 +10,6 @@ type UserQueryReq struct {
 type UserLoginReq struct {
 	*UserRegisterReq
 }
+type UserLogoutReq struct {
+	Jwt string `json:"jwt"`
+}

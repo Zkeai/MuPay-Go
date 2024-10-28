@@ -42,6 +42,7 @@ func InitRouter(s *chttp.Server, service *service.Service) {
 	{
 		ugpub.POST("/register", userRegister)
 		ugpub.POST("/login", userLogin)
+		ugpub.POST("/logout", userLogout)
 	}
 
 	ugpro := ug.Group("/protected")

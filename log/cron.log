@@ -1,0 +1,8 @@
+2024-10-28/14:23:28 [ERR] #/Users/zq/web3/MuPay-Go/internal/repo/db/user.go#github.com/Zkeai/MuPay-Go/internal/repo/db.(*DB).QueryUser#48行#[[Error 1146 (42S02): Table 'mupay.yu_user' doesn't exist]]
+2024-10-28/14:23:28 [ERR] #/Users/zq/web3/MuPay-Go/internal/repo/db/user.go#github.com/Zkeai/MuPay-Go/internal/repo/db.(*DB).QueryUser#48行#[[Error 1146 (42S02): Table 'mupay.yu_user' doesn't exist]]
+2024-10-28/14:23:28 [ERR] #/Users/zq/web3/MuPay-Go/internal/handler/user.go#github.com/Zkeai/MuPay-Go/internal/handler.userLogin#63行#[[Error 1146 (42S02): Table 'mupay.yu_user' doesn't exist]]
+2024-10-28/14:26:34 [ERR] #/Users/zq/web3/MuPay-Go/internal/repo/db/user.go#github.com/Zkeai/MuPay-Go/internal/repo/db.(*DB).QueryUser#48行#[[Error 1146 (42S02): Table 'mupay.yu_user' doesn't exist]]
+2024-10-28/14:26:34 [ERR] #/Users/zq/web3/MuPay-Go/internal/repo/db/user.go#github.com/Zkeai/MuPay-Go/internal/repo/db.(*DB).QueryUser#48行#[[Error 1146 (42S02): Table 'mupay.yu_user' doesn't exist]]
+2024-10-28/14:26:34 [ERR] #/Users/zq/web3/MuPay-Go/internal/handler/user.go#github.com/Zkeai/MuPay-Go/internal/handler.userLogin#63行#[[Error 1146 (42S02): Table 'mupay.yu_user' doesn't exist]]
+2024-10-28/14:29:15 [ERR] #/Users/zq/web3/MuPay-Go/internal/handler/user.go#github.com/Zkeai/MuPay-Go/internal/handler.userLogin#63行#[[Error 1146 (42S02): Table 'mupay.yu_business' doesn't exist]]
+2024-10-28/14:54:35 [ERR] #/Users/zq/web3/MuPay-Go/internal/handler/user.go#github.com/Zkeai/MuPay-Go/internal/handler.userLogin#56行#[[json: cannot unmarshal string into Go value of type dto.UserLoginReq]]
