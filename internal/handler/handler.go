@@ -83,4 +83,17 @@ func InitRouter(s *chttp.Server, service *service.Service) {
 		comgpro.POST("/add", createCommodity)
 	}
 
+	nomg := g.Group("/nav")
+	//nomgpub := nomg.Group("/public")
+	//{
+	//
+	//}
+	nomg.Use(middleware.Middleware())
+	nomg.Use(middleware.CasbinMiddleware(e))
+	nomgpro := nomg.Group("/protected")
+	{
+		nomgpro.POST("/add", createNav)
+		nomgpro.GET("/query", navQuery)
+	}
+
 }

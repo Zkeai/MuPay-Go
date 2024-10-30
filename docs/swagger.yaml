@@ -17,6 +17,23 @@ definitions:
       msg:
         type: string
     type: object
+  db.NavItem:
+    properties:
+      icon:
+        type: string
+      id:
+        type: integer
+      itemKey:
+        type: string
+      orderIndex:
+        type: integer
+      parentId:
+        type: integer
+      roles:
+        type: string
+      text:
+        type: string
+    type: object
   db.YuCommodity:
     properties:
       api_status:
@@ -279,6 +296,53 @@ paths:
       summary: 商品查询
       tags:
       - commodity
+  /nav/projected/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 增加侧边栏提交参数
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/db.NavItem'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: 参数错误
+          schema:
+            type: string
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 增加侧边栏
+      tags:
+      - nav
+  /nav/protected/query:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/conf.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/conf.ResponseError'
+        "500":
+          description: 内部错误
+          schema:
+            type: string
+      summary: 侧边栏查询
+      tags:
+      - nav
   /user/protected/query:
     get:
       parameters:

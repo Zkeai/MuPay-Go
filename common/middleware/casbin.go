@@ -64,6 +64,6 @@ func getRole(userType int) string {
 	case 2:
 		return "admin"
 	default:
-		return ""
+		return "user"
 	}
 }

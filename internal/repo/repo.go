@@ -85,3 +85,13 @@ func (r *Repo) DeletePay(ctx context.Context, id int) error {
 
 	return r.db.DeleteYuPay(ctx, id)
 }
+
+func (r *Repo) CreateNav(ctx context.Context, nav *db.NavItem) (string, error) {
+
+	return r.db.InsertNavItem(ctx, nav)
+}
+
+func (r *Repo) GetNav(ctx context.Context, role string) ([]db.NavItem, error) {
+
+	return r.db.QueryNavItem(ctx, role)
+}
